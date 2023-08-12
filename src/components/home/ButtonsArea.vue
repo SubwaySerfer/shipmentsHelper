@@ -1,17 +1,19 @@
 <template>
   <section class="buttons-wrapper">
-    <button class="btn-area btn-copy">COPY</button>
+    <button class="btn-area btn-copy" @click="initialCopy">COPY</button>
     <button class="btn-area btn-del" @click="initialDel">DELETE</button>
   </section>
 </template>
 
 <script>
 export default {
-  emits: ["del-text"],
+  emits: ["del-text", "copy-text"],
   methods: {
     initialDel() {
-      console.log("emit start");
       this.$emit("del-text");
+    },
+    initialCopy() {
+      this.$emit("copy-text");
     },
   },
 };

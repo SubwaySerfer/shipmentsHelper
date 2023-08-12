@@ -5,25 +5,32 @@
       <div>
         <textarea
           name="initial"
-          id=""
+          id="initArea"
           cols="20"
           rows="20"
           class="initial-text"
           v-model="initialArea"
         >
         </textarea>
-        <buttons-area @del-text="deleteTextArea"></buttons-area>
+        <buttons-area
+          @del-text="deleteTextArea('initialArea')"
+          @copy-text="copyTextArea('initialArea')"
+        ></buttons-area>
       </div>
       <button class="btn-transform">Transform</button>
       <div>
         <textarea
           name="finally"
-          id=""
+          id="finArea"
           cols="20"
           rows="20"
           class="finally-text"
+          v-model="finAreaText"
         ></textarea>
-        <buttons-area></buttons-area>
+        <buttons-area
+          @del-text="deleteTextArea('finAreaText')"
+          @copy-text="copyTextArea('finAreaText')"
+        ></buttons-area>
       </div>
     </div>
     <div>footer</div>
@@ -36,15 +43,28 @@ export default {
   data() {
     return {
       initialArea: "",
+      finAreaText: "",
     };
   },
   components: {
     ButtonsArea,
   },
   methods: {
-    deleteTextArea() {
-      console.log("deleteTextArea start");
-      this.initialArea = "";
+    deleteTextArea(nameArea) {
+      if (nameArea == "initialArea") {
+        this.initialArea = "";
+      } else if (nameArea == "finAreaText") this.finAreaText = "";
+    },
+    copyTextArea(nameArea) {
+      try {
+        if (nameArea == "initialArea") {
+          navigator.clipboard.writeText(this.initialArea);
+        } else if (nameArea == "finAreaText") {
+          navigator.clipboard.writeText(this.finAreaText);
+        }
+      } catch (e) {
+        throw e;
+      }
     },
   },
 };
