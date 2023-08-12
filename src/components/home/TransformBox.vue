@@ -114,19 +114,4 @@ textarea {
   border: 3px solid blueviolet;
   cursor: copy;
 }
-.buttons-box {
-  display: flex;
-  flex-direction: column;
-  height: 50%;
-  justify-content: center;
-  gap: 3rem;
-}
-.btn-transform {
-  height: 3rem;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: blueviolet;
-  color: white;
-  font-weight: bold;
-}
 </style>

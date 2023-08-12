@@ -1,7 +1,9 @@
 <template>
   <div class="buttons-box">
-    <button class="btn-transform" @click="transformation">Transform</button>
-    <button @click="this.$emit('refresh-areas')">refresh</button>
+    <button class="btn-transform btn" @click="transformation">Transform</button>
+    <button class="btn btn-refresh" @click="this.$emit('refresh-areas')">
+      Refresh
+    </button>
   </div>
 </template>
 
@@ -42,3 +44,28 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.buttons-box {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.btn {
+  height: 3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-transform {
+  background-color: blueviolet;
+  color: white;
+}
+.btn-refresh {
+  background-color: greenyellow;
+  color: black;
+}
+</style>
