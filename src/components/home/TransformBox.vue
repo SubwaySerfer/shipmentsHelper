@@ -22,6 +22,7 @@
       <global-buttons
         :initialText="this.initialText"
         @get-textarea="getTextArea"
+        @refresh-areas="refreashTextAreas"
       ></global-buttons>
 
       <div>
@@ -80,6 +81,10 @@ export default {
     },
     getTextArea(arr) {
       this.finAreaText = arr;
+    },
+    refreashTextAreas() {
+      this.finAreaText = "";
+      this.initialText = "";
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="buttons-box">
     <button class="btn-transform" @click="transformation">Transform</button>
-    <button>refresh</button>
+    <button @click="this.$emit('refresh-areas')">refresh</button>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
       default: null,
     },
   },
-  emits: ["get-textarea"],
+  emits: ["get-textarea", "refresh-areas"],
   data() {
     return { currentText: "" };
   },
