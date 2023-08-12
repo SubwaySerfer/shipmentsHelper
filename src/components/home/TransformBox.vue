@@ -9,15 +9,21 @@
           cols="20"
           rows="20"
           class="initial-text"
-          v-model="initialArea"
+          v-model="initialText"
         >
         </textarea>
-        <buttons-area
-          @del-text="deleteTextArea('initialArea')"
-          @copy-text="copyTextArea('initialArea')"
-        ></buttons-area>
+        <card-buttons
+          @del-text="deleteTextArea('initialText')"
+          @copy-text="copyTextArea('initialText')"
+        >
+        </card-buttons>
       </div>
-      <button class="btn-transform" @click="transformation">Transform</button>
+
+      <global-buttons
+        :initialText="this.initialText"
+        @get-textarea="getTextArea"
+      ></global-buttons>
+
       <div>
         <textarea
           name="finally"
@@ -27,11 +33,13 @@
           class="finally-text"
           readonly
           v-model="finAreaText"
+          @click="copyTextArea('finAreaText')"
         ></textarea>
-        <buttons-area
+        <card-buttons
           @del-text="deleteTextArea('finAreaText')"
           @copy-text="copyTextArea('finAreaText')"
-        ></buttons-area>
+        >
+        </card-buttons>
       </div>
     </div>
     <div>footer</div>
@@ -39,27 +47,30 @@
 </template>
 
 <script>
-import ButtonsArea from "./ButtonsArea.vue";
+import CardButtons from "./CardButtons.vue";
+import GlobalButtons from "./GlobalButtons.vue";
+
 export default {
   data() {
     return {
-      initialArea: "",
+      initialText: "",
       finAreaText: "",
     };
   },
   components: {
-    ButtonsArea,
+    CardButtons,
+    GlobalButtons,
   },
   methods: {
     deleteTextArea(nameArea) {
-      if (nameArea == "initialArea") {
-        this.initialArea = "";
+      if (nameArea == "initialText") {
+        this.initialText = "";
       } else if (nameArea == "finAreaText") this.finAreaText = "";
     },
     copyTextArea(nameArea) {
       try {
-        if (nameArea == "initialArea") {
-          navigator.clipboard.writeText(this.initialArea);
+        if (nameArea == "initialText") {
+          navigator.clipboard.writeText(this.initialText);
         } else if (nameArea == "finAreaText") {
           navigator.clipboard.writeText(this.finAreaText);
         }
@@ -67,25 +78,8 @@ export default {
         throw e;
       }
     },
-    transformation() {
-      //TODO: проверку на пустой входной массив
-      const finArr = [];
-      let newArr;
-      let data = this.initialArea.trim();
-      if (data.includes("\n")) {
-        newArr = data.split("\n");
-      } else if (data.includes(" ")) {
-        newArr = data.split(" ");
-      }
-      newArr.forEach((el) => {
-        if (el.length == 13 && el.slice(0, 5) == "10000") {
-          finArr.push(el.slice(5, -1));
-        } else {
-          finArr.push(el);
-        }
-      });
-      this.finAreaText = finArr.join(",").replace(/,/g, " \n");
-      // console.log(finArr.join(",").replace(/,/g, " \n"));
+    getTextArea(arr) {
+      this.finAreaText = arr;
     },
   },
 };
@@ -113,6 +107,14 @@ textarea {
 }
 .finally-text {
   border: 3px solid blueviolet;
+  cursor: copy;
+}
+.buttons-box {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: center;
+  gap: 3rem;
 }
 .btn-transform {
   height: 3rem;
