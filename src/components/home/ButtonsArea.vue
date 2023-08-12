@@ -1,9 +1,21 @@
 <template>
   <section class="buttons-wrapper">
     <button class="btn-area btn-copy">COPY</button>
-    <button class="btn-area btn-del">DELETE</button>
+    <button class="btn-area btn-del" @click="initialDel">DELETE</button>
   </section>
 </template>
+
+<script>
+export default {
+  emits: ["del-text"],
+  methods: {
+    initialDel() {
+      console.log("emit start");
+      this.$emit("del-text");
+    },
+  },
+};
+</script>
 
 <style scoped>
 .buttons-wrapper {

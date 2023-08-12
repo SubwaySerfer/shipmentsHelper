@@ -3,11 +3,16 @@
     <div>head</div>
     <div class="main-box">
       <div>
-        <textarea name="initial" id="" cols="20" rows="20" class="initial-text">
-aasd
-</textarea
+        <textarea
+          name="initial"
+          id=""
+          cols="20"
+          rows="20"
+          class="initial-text"
+          v-model="initialArea"
         >
-        <buttons-area></buttons-area>
+        </textarea>
+        <buttons-area @del-text="deleteTextArea"></buttons-area>
       </div>
       <button class="btn-transform">Transform</button>
       <div>
@@ -21,15 +26,26 @@ aasd
         <buttons-area></buttons-area>
       </div>
     </div>
-    <div>buttons</div>
+    <div>footer</div>
   </section>
 </template>
 
 <script>
 import ButtonsArea from "./ButtonsArea.vue";
 export default {
+  data() {
+    return {
+      initialArea: "",
+    };
+  },
   components: {
     ButtonsArea,
+  },
+  methods: {
+    deleteTextArea() {
+      console.log("deleteTextArea start");
+      this.initialArea = "";
+    },
   },
 };
 </script>
