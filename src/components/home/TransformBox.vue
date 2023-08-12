@@ -7,8 +7,9 @@
 aasd
 </textarea
         >
-        <div>buttons</div>
+        <buttons-area></buttons-area>
       </div>
+      <button class="btn-transform">Transform</button>
       <div>
         <textarea
           name="finally"
@@ -17,12 +18,21 @@ aasd
           rows="20"
           class="finally-text"
         ></textarea>
-        <div>buttons</div>
+        <buttons-area></buttons-area>
       </div>
     </div>
     <div>buttons</div>
   </section>
 </template>
+
+<script>
+import ButtonsArea from "./ButtonsArea.vue";
+export default {
+  components: {
+    ButtonsArea,
+  },
+};
+</script>
 
 <style scoped>
 .wrapper {
@@ -35,7 +45,8 @@ aasd
 }
 .main-box {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
+  align-items: center;
 }
 textarea {
   font-size: 1.6rem;
@@ -45,5 +56,13 @@ textarea {
 }
 .finally-text {
   border: 3px solid blueviolet;
+}
+.btn-transform {
+  height: 3rem;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: blueviolet;
+  color: white;
+  font-weight: bold;
 }
 </style>
