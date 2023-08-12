@@ -17,7 +17,7 @@
           @copy-text="copyTextArea('initialArea')"
         ></buttons-area>
       </div>
-      <button class="btn-transform">Transform</button>
+      <button class="btn-transform" @click="transformation">Transform</button>
       <div>
         <textarea
           name="finally"
@@ -25,6 +25,7 @@
           cols="20"
           rows="20"
           class="finally-text"
+          readonly
           v-model="finAreaText"
         ></textarea>
         <buttons-area
@@ -65,6 +66,26 @@ export default {
       } catch (e) {
         throw e;
       }
+    },
+    transformation() {
+      //TODO: проверку на пустой входной массив
+      const finArr = [];
+      let newArr;
+      let data = this.initialArea.trim();
+      if (data.includes("\n")) {
+        newArr = data.split("\n");
+      } else if (data.includes(" ")) {
+        newArr = data.split(" ");
+      }
+      newArr.forEach((el) => {
+        if (el.length == 13 && el.slice(0, 5) == "10000") {
+          finArr.push(el.slice(5, -1));
+        } else {
+          finArr.push(el);
+        }
+      });
+      this.finAreaText = finArr.join(",").replace(/,/g, " \n");
+      // console.log(finArr.join(",").replace(/,/g, " \n"));
     },
   },
 };
