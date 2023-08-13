@@ -29,7 +29,7 @@ export default {
   align-items: center;
 }
 .btn-area {
-  height: 2rem;
+  height: 2.2rem;
   padding: 2px 5px;
   width: 7rem;
   border: 2px solid;

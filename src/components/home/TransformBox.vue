@@ -1,8 +1,8 @@
 <template>
   <section class="wrapper">
-    <div>head</div>
+    <div></div>
     <div class="main-box">
-      <div>
+      <div class="card">
         <textarea
           name="initial"
           id="initArea"
@@ -25,7 +25,7 @@
         @refresh-areas="refreashTextAreas"
       ></global-buttons>
 
-      <div>
+      <div class="card">
         <textarea
           name="finally"
           id="finArea"
@@ -43,7 +43,7 @@
         </card-buttons>
       </div>
     </div>
-    <div>footer</div>
+    <div></div>
   </section>
 </template>
 
@@ -103,6 +103,11 @@ export default {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 textarea {
   font-size: 1.6rem;
